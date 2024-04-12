@@ -1,7 +1,8 @@
-function Book(title, author, pages) {
+function Book(title, author, pages, isRead) {
   this.title = title;
   this.author = author;
   this.pages = pages;
+  this.isRead = isRead;
 }
 Book.prototype.getTitle = function () {
   return this.title;
@@ -12,11 +13,14 @@ Book.prototype.getAuthor = function () {
 Book.prototype.getPages = function () {
   return this.pages;
 };
+Book.prototype.getIsRead = function () {
+  return this.isRead;
+};
 
 const myLibrary = [];
 
-const addBookToLibrary = (title, author, pages, library) => {
-  const newBook = new Book(title, author, pages);
+const addBookToLibrary = (title, author, pages, isRead, library) => {
+  const newBook = new Book(title, author, pages, isRead);
   library.push(newBook);
 };
 
@@ -28,22 +32,27 @@ const updateBooksDisplay = (library, container) => {
     const titleDiv = document.createElement("div");
     const authorDiv = document.createElement("div");
     const pagesDiv = document.createElement("div");
+    const isReadDiv = document.createElement("div");
     const removeBtn = document.createElement("button");
+
     cardDiv.classList.add("card");
     cardDiv.setAttribute("id", `card-${index}`);
     titleDiv.classList.add("card-title");
     authorDiv.classList.add("card-author");
     pagesDiv.classList.add("card-pages");
+    isReadDiv.classList.add("card-read");
     removeBtn.classList.add("card-remove-btn");
 
     titleDiv.textContent = book.getTitle();
     authorDiv.textContent = book.getAuthor();
     pagesDiv.textContent = book.getPages();
+    isReadDiv.textContent = book.getIsRead() ? "Already read" : "Not read yet";
     removeBtn.textContent = "REMOVE";
 
     cardDiv.appendChild(titleDiv);
     cardDiv.appendChild(authorDiv);
     cardDiv.appendChild(pagesDiv);
+    cardDiv.appendChild(isReadDiv);
     cardDiv.appendChild(removeBtn);
     libraryContainer.appendChild(cardDiv);
   });
@@ -82,11 +91,13 @@ formBook.addEventListener("submit", (e) => {
   const title = document.querySelector("#title");
   const author = document.querySelector("#author");
   const pages = document.querySelector("#pages");
+  const isRead = document.querySelector("#read");
 
-  addBookToLibrary(title.value, author.value, pages.value, myLibrary);
+  addBookToLibrary(title.value, author.value, pages.value, isRead.checked, myLibrary);
   title.value = "";
   author.value = "";
   pages.value = "";
+  isRead.checked = false;
 
   updateBooksDisplay(myLibrary, libraryContainer);
   modal.close();

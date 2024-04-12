@@ -29,6 +29,7 @@ dialog {
 
 input {
   display: block;
+  margin-bottom: 1rem;
 }
 input[type="number"] {
   appearance: textfield;
