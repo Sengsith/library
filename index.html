@@ -8,6 +8,19 @@
     <script src="script.js" defer></script>
   </head>
   <body>
-    <div class="library"></div>
+    <button class="btn-add-book" data-open-modal>NEW BOOK</button>
+    <dialog data-modal>
+      <form action="" class="form-book">
+        <label for="title">Title</label>
+        <input type="text" name="title" id="title" placeholder="Title" autocomplete="off" />
+        <label for="author">Author</label>
+        <input type="text" name="author" id="author" placeholder="Author" autocomplete="off" />
+        <label for="pages">Pages</label>
+        <input type="number" name="pages" id="pages" placeholder="123" autocomplete="off" />
+        <button type="submit" class="form-btn">Add Book</button>
+      </form>
+      <button data-close-modal>Close</button>
+    </dialog>
+    <div class="library-container"></div>
   </body>
 </html>
