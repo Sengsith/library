@@ -23,23 +23,28 @@ const addBookToLibrary = (title, author, pages, library) => {
 const updateBooksDisplay = (library, container) => {
   container.textContent = "";
 
-  library.forEach((book) => {
+  library.forEach((book, index) => {
     const cardDiv = document.createElement("div");
     const titleDiv = document.createElement("div");
     const authorDiv = document.createElement("div");
     const pagesDiv = document.createElement("div");
+    const removeBtn = document.createElement("button");
     cardDiv.classList.add("card");
+    cardDiv.setAttribute("id", `card-${index}`);
     titleDiv.classList.add("card-title");
     authorDiv.classList.add("card-author");
     pagesDiv.classList.add("card-pages");
+    removeBtn.classList.add("card-remove-btn");
 
     titleDiv.textContent = book.getTitle();
     authorDiv.textContent = book.getAuthor();
     pagesDiv.textContent = book.getPages();
+    removeBtn.textContent = "REMOVE";
 
     cardDiv.appendChild(titleDiv);
     cardDiv.appendChild(authorDiv);
     cardDiv.appendChild(pagesDiv);
+    cardDiv.appendChild(removeBtn);
     libraryContainer.appendChild(cardDiv);
   });
 };
@@ -55,6 +60,20 @@ openButton.addEventListener("click", () => {
 });
 closeButton.addEventListener("click", () => {
   modal.close();
+});
+
+// Logic for deleting a card
+libraryContainer.addEventListener("click", (e) => {
+  if (e.target.classList.contains("card-remove-btn")) {
+    // Get parent's ID
+    // Remove that specific index from myLibrary
+    // Update the display
+    const cardId = e.target.parentElement.id;
+    const id = cardId[cardId.length - 1];
+
+    myLibrary.splice(id, 1);
+    updateBooksDisplay(myLibrary, libraryContainer);
+  }
 });
 
 const formBook = document.querySelector(".form-book");
