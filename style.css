@@ -47,3 +47,7 @@ input[type="number"] {
   padding: 2rem;
   box-shadow: 10px 10px 5px 0px hsl(0, 0%, 0%);
 }
+
+.card-remove-btn {
+  margin-top: 2rem;
+}

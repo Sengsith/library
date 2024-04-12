@@ -16,6 +16,9 @@ Book.prototype.getPages = function () {
 Book.prototype.getIsRead = function () {
   return this.isRead;
 };
+Book.prototype.toggleIsRead = function () {
+  this.isRead = !this.isRead;
+};
 
 const myLibrary = [];
 
@@ -33,6 +36,7 @@ const updateBooksDisplay = (library, container) => {
     const authorDiv = document.createElement("div");
     const pagesDiv = document.createElement("div");
     const isReadDiv = document.createElement("div");
+    const toggleIsReadBtn = document.createElement("button");
     const removeBtn = document.createElement("button");
 
     cardDiv.classList.add("card");
@@ -41,18 +45,21 @@ const updateBooksDisplay = (library, container) => {
     authorDiv.classList.add("card-author");
     pagesDiv.classList.add("card-pages");
     isReadDiv.classList.add("card-read");
+    toggleIsReadBtn.classList.add("card-toggle-read-btn");
     removeBtn.classList.add("card-remove-btn");
 
     titleDiv.textContent = book.getTitle();
     authorDiv.textContent = book.getAuthor();
     pagesDiv.textContent = book.getPages();
     isReadDiv.textContent = book.getIsRead() ? "Already read" : "Not read yet";
-    removeBtn.textContent = "REMOVE";
+    toggleIsReadBtn.textContent = "TOGGLE READ";
+    removeBtn.textContent = "REMOVE BOOK";
 
     cardDiv.appendChild(titleDiv);
     cardDiv.appendChild(authorDiv);
     cardDiv.appendChild(pagesDiv);
     cardDiv.appendChild(isReadDiv);
+    cardDiv.appendChild(toggleIsReadBtn);
     cardDiv.appendChild(removeBtn);
     libraryContainer.appendChild(cardDiv);
   });
@@ -73,14 +80,24 @@ closeButton.addEventListener("click", () => {
 
 // Logic for deleting a card
 libraryContainer.addEventListener("click", (e) => {
+  const cardId = e.target.parentElement.id;
+  const idIndex = cardId[cardId.length - 1];
+
+  // Logic to remove book from library
   if (e.target.classList.contains("card-remove-btn")) {
     // Get parent's ID
     // Remove that specific index from myLibrary
     // Update the display
-    const cardId = e.target.parentElement.id;
-    const id = cardId[cardId.length - 1];
 
-    myLibrary.splice(id, 1);
+    myLibrary.splice(idIndex, 1);
+    updateBooksDisplay(myLibrary, libraryContainer);
+  }
+
+  // Logic to toggle read status for an existing book
+  if (e.target.classList.contains("card-toggle-read-btn")) {
+    // Call the specific book's toggleIsRead function
+    // Get the parent's ID
+    myLibrary[idIndex].toggleIsRead();
     updateBooksDisplay(myLibrary, libraryContainer);
   }
 });
