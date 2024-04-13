@@ -1,11 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+
 * {
   padding: 0;
+  font-family: "Lato", sans-serif;
   margin: 0;
   box-sizing: border-box;
 }
 
 img {
   max-width: 100%;
+}
+
+:root {
+  --box-shadow: 10px 10px 5px 0px hsl(0, 0%, 0%);
 }
 
 html {
@@ -21,18 +28,50 @@ body {
   gap: 1rem;
 }
 
+h1,
+h2 {
+  color: white;
+}
+
+button {
+  border: transparent;
+  border-radius: 0.5rem;
+  margin-top: 2rem;
+}
+
+.btn-add-book,
+.form-btn,
+.btn-close {
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
 dialog {
   background-color: gray;
   margin: auto;
   padding: 5rem;
+  border-radius: 0.5rem;
+  box-shadow: var(--box-shadow);
+}
+
+label {
+  font-size: 1.5rem;
 }
 
 input {
   display: block;
   margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  border: transparent;
 }
 input[type="number"] {
   appearance: textfield;
+}
+input[type="checkbox"] {
+  height: 25px;
+  width: 25px;
 }
 
 .library-container {
@@ -48,6 +87,14 @@ input[type="number"] {
   box-shadow: 10px 10px 5px 0px hsl(0, 0%, 0%);
 }
 
+.card {
+  font-size: 1.5rem;
+}
 .card-remove-btn {
-  margin-top: 2rem;
+  display: block;
+}
+.card-toggle-read-btn,
+.card-remove-btn {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
 }

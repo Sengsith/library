@@ -50,7 +50,7 @@ const updateBooksDisplay = (library, container) => {
 
     titleDiv.textContent = book.getTitle();
     authorDiv.textContent = book.getAuthor();
-    pagesDiv.textContent = book.getPages();
+    pagesDiv.textContent = `${book.getPages()} pages`;
     isReadDiv.textContent = book.getIsRead() ? "Already read" : "Not read yet";
     toggleIsReadBtn.textContent = "TOGGLE READ";
     removeBtn.textContent = "REMOVE BOOK";
